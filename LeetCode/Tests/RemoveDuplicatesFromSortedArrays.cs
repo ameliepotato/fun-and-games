@@ -15,8 +15,6 @@ namespace Tests
         [Test]
         public void Test1()
         {
-            bool ret = true;
-
             List<int> testData = new List<int>() { 1, 1, 1, 2, 2, 3 };
             List<int> expectedData = new List<int>() { 1, 1, 2, 2, 3 };
 
