@@ -11,21 +11,40 @@ namespace LeetCode.Algorithms
     {
         public static int Run(int[] nums)
         {
-            Console.WriteLine($"MaxProfit with: {CommonTools.PrintCollection(nums.ToList())}");
-            int maxProfit = int.MinValue;
-            int lastProfit = 0;
-            for (int i = nums.Length - 2; i >= 0; i--)
+            int p = 0;
+            int min = 0;
+            for(int i = 1; i < nums.Length; i++)
             {
-                var profitIfBuyTodayAndSellTomorrow = nums[i + 1] - nums[i];
+                int d = nums[i] - nums[min];
+                if (d > p)
+                {
+                    p = d;
+                } 
+                else if (d < 0)
+                {
+                    min = i;
+                }
 
-                lastProfit = lastProfit + profitIfBuyTodayAndSellTomorrow;
-                if (lastProfit < profitIfBuyTodayAndSellTomorrow) 
-                    lastProfit = profitIfBuyTodayAndSellTomorrow;
-
-                if (lastProfit > maxProfit)
-                    maxProfit = lastProfit;
             }
-            return maxProfit < 0 ? 0 : maxProfit;
+            return p;
+
+
+            //Console.WriteLine($"MaxProfit with: {CommonTools.PrintCollection(nums.ToList())}");
+            //int maxProfit = 0;
+            //int lastProfit = 0;
+            //int profitIfBuyTodayAndSellTomorrow;
+            //for (int i = nums.Length - 2; i >= 0; i--)
+            //{
+            //    profitIfBuyTodayAndSellTomorrow = nums[i + 1] - nums[i];
+
+            //    lastProfit = lastProfit + profitIfBuyTodayAndSellTomorrow;
+            //    if (lastProfit < profitIfBuyTodayAndSellTomorrow) 
+            //        lastProfit = profitIfBuyTodayAndSellTomorrow;
+
+            //    if (lastProfit > 0 && lastProfit > maxProfit)
+            //        maxProfit = lastProfit;
+            //}
+            //return maxProfit;
         }
     }
 }
