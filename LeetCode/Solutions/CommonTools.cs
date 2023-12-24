@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace LeetCode
@@ -10,6 +11,10 @@ namespace LeetCode
     {
         public static string PrintCollection<T>(List<T> enumerable)
         {
+            if(enumerable.Count > 100)
+            {
+                return $"List is too long to print: {enumerable.Count} elements";
+            }
             string res = "\n[";
             int i = 0;
             foreach (var item in enumerable)
@@ -33,6 +38,15 @@ namespace LeetCode
             }
             Console.WriteLine($"Arrays {(ret?"are":"aren't")} equal: {PrintCollection(a.ToList())} {PrintCollection(b.ToList())}");
             return ret;
+        }
+
+        public static List<T>? LoadFromFile<T>(string filepath)
+        {
+            Console.WriteLine($"LoadFromFile Started at: {DateTime.Now}");
+            string fileContent = File.ReadAllText(filepath);
+            List<T>? result = JsonSerializer.Deserialize<List<T>>(fileContent);
+            Console.WriteLine($"LoadFromFile Ended at:   {DateTime.Now}");
+            return result;
         }
     }
 }
