@@ -21,4 +21,13 @@
     <ProjectReference Include="..\Solutions\LeetCode.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestData\MaxProfit.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\MaxProfitALotOfZeros.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
