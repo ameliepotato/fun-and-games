@@ -94,5 +94,33 @@ namespace Tests
             int output = LeetCode.Algorithms.MaxProfit.Run(input);
             Assert.That(output, Is.EqualTo(expected));
         }
+
+
+        [Test]
+        public void Test7()
+        {
+            int[] input = new int[] { 1 };
+            int expected = 0;
+            int output = LeetCode.Algorithms.MaxProfit.Run(input);
+            Assert.That(output, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Test8()
+        {
+            int[] input = new int[] { 2, 1 };
+            int expected = 0;
+            int output = LeetCode.Algorithms.MaxProfit.Run(input);
+            Assert.That(output, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Test9()
+        {
+            int[] input = new int[] { 3, 3, 5, 0, 0, 3, 1, 4 };
+            int expected = 4;
+            int output = LeetCode.Algorithms.MaxProfit.Run(input);
+            Assert.That(output, Is.EqualTo(expected));
+        }
     }
 }

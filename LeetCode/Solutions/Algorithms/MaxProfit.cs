@@ -12,37 +12,20 @@ namespace LeetCode.Algorithms
         public static int Run(int[] nums)
         {
             Console.WriteLine($"MaxProfit with: {CommonTools.PrintCollection(nums.ToList())}");
-            int max = 0;
-            int min = nums[0];
-            for (int i = 0; i < nums.Length; i++)
+            int maxProfit = int.MinValue;
+            int lastProfit = 0;
+            for (int i = nums.Length - 2; i >= 0; i--)
             {
-                if (i==0 || nums[i]< min)
-                {
-                    min = nums[i];
-                }
-                else
-                {
-                    continue;
-                }
+                var profitIfBuyTodayAndSellTomorrow = nums[i + 1] - nums[i];
 
-                int mymax = GetMaxDistance(nums, i);
-                if(mymax > max) 
-                    max = mymax;
-            }
-            return max;
-        }
+                lastProfit = lastProfit + profitIfBuyTodayAndSellTomorrow;
+                if (lastProfit < profitIfBuyTodayAndSellTomorrow) 
+                    lastProfit = profitIfBuyTodayAndSellTomorrow;
 
-        public static int GetMaxDistance(int[] nums, int i)
-        {
-            int max = 0;
-            for (int j = i+1; j < nums.Length; j++)
-            {
-                if (nums[j] > nums[i] && (nums[j] - nums[i]) > max )
-                {
-                    max = nums[j]-nums[i];
-                }
+                if (lastProfit > maxProfit)
+                    maxProfit = lastProfit;
             }
-            return max;
+            return maxProfit < 0 ? 0 : maxProfit;
         }
     }
 }
