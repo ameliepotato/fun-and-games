@@ -9,11 +9,11 @@ namespace LeetCode
 {
     public class CommonTools
     {
-        public static string PrintCollection<T>(List<T> enumerable)
+        public static string PrintCollection<T>(IEnumerable<T> enumerable)
         {
-            if(enumerable.Count > 100)
+            if(enumerable.Count() > 100)
             {
-                return $"List is too long to print: {enumerable.Count} elements";
+                return $"List is too long to print: {enumerable.Count()} elements";
             }
             string res = "\n[";
             int i = 0;
