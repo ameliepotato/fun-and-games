@@ -15,7 +15,7 @@ namespace LeetCode
             {
                 return $"List is too long to print: {enumerable.Count()} elements";
             }
-            string res = "\n[";
+            string res = "[";
             int i = 0;
             foreach (var item in enumerable)
             {
@@ -36,7 +36,7 @@ namespace LeetCode
                     ret &= a[i] == b[i];
                 }
             }
-            Console.WriteLine($"Arrays {(ret?"are":"aren't")} equal: {PrintCollection(a.ToList())} {PrintCollection(b.ToList())}");
+            Console.WriteLine($"Arrays {(ret?"are":"aren't")} equal: \n\t{PrintCollection(a.ToList())}\n\t{PrintCollection(b.ToList())}");
             return ret;
         }
 

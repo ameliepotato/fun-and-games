@@ -9,7 +9,7 @@ namespace LeetCode.Algorithms
 {
     public class RotateArray
     {
-        public static void Run(List<int> nums, int k)
+        public static void Run(int[] nums, int k)
         {
             CommonTools.PrintCollection(nums);
             for (int i = 0; i < k; i++)
@@ -19,20 +19,22 @@ namespace LeetCode.Algorithms
             CommonTools.PrintCollection(nums);
         }
 
-        public static void RunOnce(List<int> nums)
+        public static int _step { get; private set; } = 1;
+        public static void RunOnce(int[] nums)
         {
-            CommonTools.PrintCollection(nums);
-            int first = nums[0];
-            for (int i = 0; i < nums.Count()-1; i++)
+            Console.WriteLine($"Moving collection step {_step}: \n\t{CommonTools.PrintCollection(nums)}");
+            int last = nums[nums.Length-1];
+            for (int i = nums.Length-1; i>0; i--)
             {
                 {
-                    var temp = nums[i + 1];
-                    nums[i + 1] = nums[i];
+                    var temp = nums[i - 1];
+                    nums[i - 1] = nums[i];
                     nums[i] = temp;
                 }
             }
-            nums[nums.Count-1] = first;
-            CommonTools.PrintCollection(nums);
+            nums[0] = last;
+            Console.WriteLine($"Moved collection: \n\t{CommonTools.PrintCollection(nums)}");
+            _step++;
         }
     }
 }
