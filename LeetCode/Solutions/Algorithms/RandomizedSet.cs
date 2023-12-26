@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LeetCode.Algorithms
 {
+    //https://leetcode.com/problems/insert-delete-getrandom-o1
     public class RandomizedSet
     {
         private List<int> _values;
