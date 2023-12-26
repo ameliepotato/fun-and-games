@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -11,30 +12,27 @@ namespace LeetCode.Algorithms
     {
         public static void Run(int[] nums, int k)
         {
-            CommonTools.PrintCollection(nums);
-            for (int i = 0; i < k; i++)
-                {
-                    RunOnce(nums);
-                }
-            CommonTools.PrintCollection(nums);
+
+            Console.WriteLine($"Rotating collection: \n\t{CommonTools.PrintCollection(nums)}");
+
+            if (k >= nums.Length)
+            {
+                k = k % nums.Length;
+            }
+
+            MoveSubArrayAtTheEnd(nums, 0, nums.Length - k, k);
+            Console.WriteLine($"Rotated collection to: \n\t{CommonTools.PrintCollection(nums)}");
         }
 
-        public static int _step { get; private set; } = 1;
-        public static void RunOnce(int[] nums)
-        {
-            Console.WriteLine($"Moving collection step {_step}: \n\t{CommonTools.PrintCollection(nums)}");
-            int last = nums[nums.Length-1];
-            for (int i = nums.Length-1; i>0; i--)
-            {
-                {
-                    var temp = nums[i - 1];
-                    nums[i - 1] = nums[i];
-                    nums[i] = temp;
-                }
-            }
-            nums[0] = last;
-            Console.WriteLine($"Moved collection: \n\t{CommonTools.PrintCollection(nums)}");
-            _step++;
+        public static void MoveSubArrayAtTheEnd(int[] nums, int start, int length, int k)
+        { 
+            Range rangeSubArray = new Range(start, start + length);
+            Range rangeLastArray = new Range(start + length, nums.Length);
+
+            var subArray = nums.Take(rangeSubArray).ToArray();
+            var lastArray = nums.Take(rangeLastArray).ToArray();
+            lastArray.CopyTo(nums, start);
+            subArray.CopyTo(nums, nums.Length - length);
         }
     }
 }

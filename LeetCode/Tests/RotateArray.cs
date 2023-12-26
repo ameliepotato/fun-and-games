@@ -52,5 +52,32 @@ namespace Tests
             Assert.That(CommonTools.AreEqual(input, output));
 
         }
+
+        [Test]
+        public void Test5()
+        {
+            var input = CommonTools.LoadFromFile<int>("TestData\\RotateArray.txt");
+
+            Assert.IsNotNull(input);
+
+            int k = 54944;
+            var expected = new int[] { };
+            int expectedSeconds = 3;
+
+            DateTime start = DateTime.Now;
+            Console.WriteLine($"RotateArray Started at: {start}");
+
+            Task t = Task.Run(() => {
+                LeetCode.Algorithms.RotateArray.Run(input.ToArray(), k);
+                DateTime end = DateTime.Now;
+                Console.WriteLine($"RotateArray Ended at:   {end}");
+                Assert.That((int)end.Subtract(start).TotalSeconds, Is.LessThan(expectedSeconds));
+            });
+
+            bool endedOnTime = t.Wait(expectedSeconds);
+
+            Assert.That(endedOnTime, $"RotateArray should take less than {expectedSeconds} seconds");
+            
+        }
     }
 }
