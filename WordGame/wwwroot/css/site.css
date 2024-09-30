@@ -1,0 +1,21 @@
+h3 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+}
+
+input {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 18px;
+    width: 100%;
+}
+
+p {
+    text-align: center;
+}

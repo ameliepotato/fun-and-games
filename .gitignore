@@ -3,10 +3,11 @@
 ################################################################################
 
 /.vs
-/LeetCode/ConsoleApp1/.vs/ConsoleApp1
-/LeetCode/ConsoleApp1/obj
-/LeetCode/Tests/bin/Debug/net7.0
+/LeetCode/Tests/bin
 /LeetCode/Tests/obj
 /LeetCode/Solutions/.vs
 /LeetCode/Solutions/obj
 /LeetCode/Solutions/bin/Debug/net7.0
+/WordGame/.vs
+/WordGame/obj
+/WordGame/bin

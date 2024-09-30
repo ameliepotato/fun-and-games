@@ -1,0 +1,95 @@
+﻿@page "/"
+@using System.Timers
+@inject IJSRuntime JS
+
+<h3>Speed Typing Game</h3>
+
+@if (!gameStarted)
+{
+    <button class="btn btn-primary" @onclick="StartGame">Start Game</button>
+}
+else
+{
+    <div>
+        <h4>Word to Type: <b>@currentWord</b></h4>
+        <input class="form-control" @bind="userInput" @onkeydown="CheckInput" placeholder="Type here..." />
+        <p><strong>Time:</strong> @elapsedTime seconds</p>
+        <p><strong>Words typed correctly:</strong> @correctWords / @totalWords</p>
+    </div>
+}
+
+@code {
+    // Words for the game
+    private string[] words = { "apple", "banana", "cherry", "date", "elephant", "fox", "grape", "hippo" };
+
+    // Variables to track game state
+    private string currentWord;
+    private string userInput = string.Empty;
+    private int correctWords = 0;
+    private int totalWords = 5;
+    private bool gameStarted = false;
+    private double elapsedTime = 0;
+    private Timer gameTimer;
+    private int wordIndex = 0;
+
+    // Initialize timer
+    protected override void OnInitialized()
+    {
+        gameTimer = new Timer(1000);
+        gameTimer.Elapsed += OnTimerElapsed;
+    }
+
+    // Start the game
+    private void StartGame()
+    {
+        correctWords = 0;
+        wordIndex = 0;
+        elapsedTime = 0;
+        gameStarted = true;
+        currentWord = GetNextWord();
+        gameTimer.Start();
+    }
+
+    // Get the next random word from the list
+    private string GetNextWord()
+    {
+        if (wordIndex >= totalWords)
+        {
+            EndGame();
+            return string.Empty;
+        }
+
+        Random rand = new Random();
+        return words[rand.Next(words.Length)];
+    }
+
+    // Timer event to update the elapsed time
+    private void OnTimerElapsed(object sender, ElapsedEventArgs e)
+    {
+        elapsedTime++;
+        InvokeAsync(StateHasChanged); // Updates the UI after the timer tick
+    }
+
+    // Handle user input when "Enter" is pressed
+    private void CheckInput(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !string.IsNullOrEmpty(userInput))
+        {
+            if (userInput.Equals(currentWord, StringComparison.OrdinalIgnoreCase))
+            {
+                correctWords++;
+            }
+            wordIndex++;
+            userInput = string.Empty;
+            currentWord = GetNextWord();
+        }
+    }
+
+    // End the game and display final results
+    private void EndGame()
+    {
+        gameStarted = false;
+        gameTimer.Stop();
+        JS.InvokeVoidAsync("alert", $"Game Over! Correct Words: {correctWords}/{totalWords}. Time: {elapsedTime} seconds.");
+    }
+}
